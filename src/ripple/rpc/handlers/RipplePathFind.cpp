@@ -64,13 +64,16 @@ Json::Value doRipplePathFind (RPC::Context& context)
         PathRequest::pointer request;
         context.suspend ([&request, &context, &jvResult, &lpLedger](RPC::Callback const& c)
         {
-             jvResult = getApp().getPathRequests().makeLegacyPathRequest (
+            jvResult = getApp().getPathRequests().makeLegacyPathRequest (
                 request, c, lpLedger, context.params);
-	    if (! request)
-	        c();
+            if (! request)
+                c();
         });
 
-        return request ? request->doStatus (context.params) : jvResult;
+        if (request)
+            jvResult = request->doStatus (context.params);
+
+        return jvResult;
     }
 
     if (!context.params.isMember (jss::source_account))

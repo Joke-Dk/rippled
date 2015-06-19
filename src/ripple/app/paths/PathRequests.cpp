@@ -234,7 +234,7 @@ Json::Value PathRequests::makeLegacyPathRequest(
     req = std::make_shared<PathRequest> (
         completion, ++mLastIdentifier, *this, mJournal);
 
-    Ledger::pointer ledger = inLedger;
+    auto ledger = inLedger;
     RippleLineCache::pointer cache;
 
     {

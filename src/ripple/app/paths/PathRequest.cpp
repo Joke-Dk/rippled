@@ -155,7 +155,7 @@ bool PathRequest::needsUpdate (bool newOnly, LedgerIndex index)
 
 bool PathRequest::hasCompletion ()
 {
-    return !!fCompletion;
+    return bool (fCompletion);
 }
 
 void PathRequest::updateComplete ()
